@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renasça aos 40+ | Descubra seu Tipo de Metabolismo</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rosa: #C2185B;
+    --rosa-vivo: #E91E8C;
+    --rosa-claro: #F8BBD0;
+    --rosa-bg: #1A0010;
+    --roxo: #1A0A2E;
+    --roxo-medio: #2D1B4E;
+    --creme: #FFF8F2;
+    --branco: #FFFFFF;
+    --cinza-texto: #DDDDDD;
+    --cinza-sub: #888888;
+    --dourado: #E8C97A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--roxo);
+    color: var(--branco);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* LANDING */
+  #landing {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(194,24,91,0.2) 0%, transparent 60%),
+      radial-gradient(ellipse at 0% 100%, rgba(194,24,91,0.1) 0%, transparent 50%),
+      linear-gradient(180deg, #1A0A2E 0%, #0D0518 100%);
+  }
+
+  .hero-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(194,24,91,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(194,24,91,0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .corner { position: absolute; width: 60px; height: 60px; opacity: 0.3; }
+  .corner.tl { top: 16px; left: 16px; border-top: 1px solid var(--rosa); border-left: 1px solid var(--rosa); }
+  .corner.tr { top: 16px; right: 16px; border-top: 1px solid var(--rosa); border-right: 1px solid var(--rosa); }
+  .corner.bl { bottom: 16px; left: 16px; border-bottom: 1px solid var(--rosa); border-left: 1px solid var(--rosa); }
+  .corner.br { bottom: 16px; right: 16px; border-bottom: 1px solid var(--rosa); border-right: 1px solid var(--rosa); }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 60px 24px 40px;
+    text-align: center;
+  }
+
+  .badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--rosa), var(--rosa-vivo));
+    color: var(--branco);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.2s both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(34px, 9vw, 58px);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--branco);
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.4s both;
+  }
+
+  .hero-title .rosa { color: var(--rosa-claro); }
+  .hero-title .gold { color: var(--dourado); }
+
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--rosa), transparent);
+    margin: 20px auto;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.5s both;
+  }
+
+  .hero-sub {
+    font-size: clamp(15px, 3.5vw, 18px);
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+    max-width: 360px;
+    margin-bottom: 40px;
+    font-style: italic;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.6s both;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--rosa), var(--rosa-vivo));
+    color: var(--branco);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 18px 40px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(194,24,91,0.4);
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.8s both, rosePulse 2.5s ease-in-out 1.5s infinite;
+    transition: transform 0.2s;
+    width: 100%;
+    max-width: 340px;
+    text-align: center;
+  }
+
+  .cta-btn:active { transform: scale(0.97); }
+
+  .cta-note {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 12px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 1s both;
+  }
+
+  .features {
+    position: relative;
+    z-index: 10;
+    padding: 0 24px 60px;
+  }
+
+  .features-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .feat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: rgba(194,24,91,0.08);
+    border: 1px solid rgba(194,24,91,0.15);
+    border-radius: 12px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .feat:nth-child(1) { animation-delay: 1.1s; }
+  .feat:nth-child(2) { animation-delay: 1.2s; }
+  .feat:nth-child(3) { animation-delay: 1.3s; }
+  .feat:nth-child(4) { animation-delay: 1.4s; }
+
+  .feat-icon { font-size: 20px; flex-shrink: 0; }
+  .feat-text { font-size: 13px; color: var(--cinza-texto); line-height: 1.4; }
+  .feat-text strong { color: var(--branco); }
+
+  /* QUIZ */
+  #quiz { display: none; min-height: 100vh; position: relative; overflow: hidden; }
+
+  .quiz-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 30%, rgba(194,24,91,0.1) 0%, transparent 60%), #0D0518;
+  }
+
+  .quiz-inner {
+    position: relative; z-index: 10;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    padding: 40px 24px;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .prog-wrap { margin-bottom: 36px; }
+
+  .prog-label {
+    display: flex; justify-content: space-between;
+    font-size: 10px; letter-spacing: 2px;
+    color: var(--cinza-sub); margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .prog-track { height: 2px; background: rgba(255,255,255,0.08); }
+
+  .prog-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--rosa), var(--rosa-vivo));
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+    width: 0%;
+  }
+
+  .q-wrap { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+  .q-num { font-size: 10px; letter-spacing: 3px; color: var(--rosa-claro); margin-bottom: 14px; text-transform: uppercase; opacity: 0.7; }
+
+  .q-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 5vw, 26px);
+    font-weight: 700; color: var(--branco);
+    line-height: 1.3; margin-bottom: 10px;
+  }
+
+  .q-sub { font-size: 13px; font-style: italic; color: var(--cinza-sub); margin-bottom: 32px; line-height: 1.5; }
+
+  .options { display: flex; flex-direction: column; gap: 10px; }
+
+  .option {
+    padding: 15px 18px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--cinza-texto);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; cursor: pointer;
+    transition: all 0.2s; text-align: left;
+    border-radius: 8px; position: relative; overflow: hidden;
+  }
+
+  .option::before {
+    content: ''; position: absolute;
+    left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--rosa); transform: scaleY(0);
+    transition: transform 0.2s; border-radius: 0 2px 2px 0;
+  }
+
+  .option:hover { background: rgba(194,24,91,0.1); border-color: rgba(194,24,91,0.3); color: var(--branco); }
+  .option:hover::before { transform: scaleY(1); }
+  .option.selected { background: rgba(194,24,91,0.15); border-color: var(--rosa); color: var(--branco); }
+  .option.selected::before { transform: scaleY(1); }
+
+  /* RESULT */
+  #result { display: none; min-height: 100vh; position: relative; overflow: hidden; }
+
+  .result-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 20%, rgba(194,24,91,0.2) 0%, transparent 60%), #0D0518;
+  }
+
+  .result-inner {
+    position: relative; z-index: 10;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 60px 24px 40px; text-align: center;
+  }
+
+  .result-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--rosa), var(--rosa-vivo));
+    color: var(--branco); font-size: 9px;
+    font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; padding: 8px 20px;
+    border-radius: 20px; margin-bottom: 28px;
+  }
+
+  .metabolismo-tipo {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px; letter-spacing: 3px;
+    color: var(--rosa-claro); text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .result-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 7vw, 38px);
+    font-weight: 900; color: var(--branco);
+    line-height: 1.2; margin-bottom: 16px;
+  }
+
+  .result-title .rosa { color: var(--rosa-claro); }
+
+  .result-desc {
+    font-size: 15px; font-style: italic;
+    color: var(--cinza-texto); line-height: 1.7;
+    max-width: 360px; margin: 0 auto 28px;
+  }
+
+  .sinais-box {
+    background: rgba(194,24,91,0.08);
+    border: 1px solid rgba(194,24,91,0.2);
+    border-radius: 16px; padding: 20px;
+    margin-bottom: 24px; max-width: 400px; width: 100%;
+    text-align: left;
+  }
+
+  .sinais-label {
+    font-size: 9px; letter-spacing: 3px;
+    color: var(--rosa-claro); text-transform: uppercase;
+    margin-bottom: 12px; display: block;
+  }
+
+  .sinal-item {
+    display: flex; align-items: center;
+    gap: 10px; padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 14px; color: var(--cinza-texto);
+  }
+
+  .sinal-item:last-child { border-bottom: none; }
+  .sinal-icon { color: var(--rosa-claro); flex-shrink: 0; }
+
+  .solucao-box {
+    background: rgba(232,201,122,0.06);
+    border: 1px solid rgba(232,201,122,0.15);
+    border-radius: 16px; padding: 20px;
+    margin-bottom: 28px; max-width: 400px; width: 100%;
+    text-align: left;
+  }
+
+  .solucao-label {
+    font-size: 9px; letter-spacing: 3px;
+    color: var(--dourado); text-transform: uppercase;
+    margin-bottom: 8px; display: block;
+  }
+
+  .solucao-text { font-size: 14px; color: var(--cinza-texto); line-height: 1.6; }
+
+  .result-cta {
+    display: block;
+    background: linear-gradient(135deg, var(--rosa), var(--rosa-vivo));
+    color: var(--branco); font-size: 16px; font-weight: 700;
+    padding: 20px 32px; border-radius: 50px;
+    text-decoration: none; border: none; cursor: pointer;
+    width: 100%; max-width: 400px;
+    text-align: center; margin-bottom: 10px;
+    animation: rosePulse 2.5s ease-in-out infinite;
+    box-shadow: 0 10px 40px rgba(194,24,91,0.5);
+    transition: transform 0.2s;
+  }
+
+  .result-cta:active { transform: scale(0.98); }
+  .result-cta-sub { font-size: 11px; color: var(--cinza-sub); }
+
+  .validacao-box {
+    background: rgba(255,255,255,0.04);
+    border-left: 3px solid var(--rosa-claro);
+    padding: 14px 18px; margin-bottom: 24px;
+    max-width: 400px; width: 100%;
+    text-align: left; border-radius: 0 12px 12px 0;
+  }
+  .validacao-text { font-size: 13px; font-style: italic; color: var(--cinza-texto); line-height: 1.6; }
+  .validacao-text strong { color: var(--rosa-claro); font-style: normal; }
+
+  .prova-box { max-width: 400px; width: 100%; margin-bottom: 24px; text-align: left; }
+  .prova-label {
+    font-size: 9px; letter-spacing: 3px; color: var(--rosa-claro);
+    text-transform: uppercase; margin-bottom: 14px; display: block; text-align: center;
+  }
+  .depo {
+    background: rgba(194,24,91,0.06); border: 1px solid rgba(194,24,91,0.15);
+    border-radius: 14px; padding: 16px; margin-bottom: 10px;
+  }
+  .depo-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .depo-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--rosa), var(--rosa-vivo));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px; color: var(--branco); flex-shrink: 0;
+  }
+  .depo-nome { font-size: 13px; font-weight: 600; color: var(--branco); }
+  .depo-idade { font-size: 11px; color: var(--cinza-sub); }
+  .depo-texto { font-size: 13px; font-style: italic; color: var(--cinza-texto); line-height: 1.6; }
+  .depo-estrelas { color: #FFD700; font-size: 12px; margin-bottom: 6px; }
+
+  .recebe-box {
+    background: rgba(232,201,122,0.05); border: 1px solid rgba(232,201,122,0.2);
+    border-radius: 16px; padding: 20px; margin-bottom: 24px;
+    max-width: 400px; width: 100%; text-align: left;
+  }
+  .recebe-label {
+    font-size: 9px; letter-spacing: 3px; color: var(--dourado);
+    text-transform: uppercase; margin-bottom: 14px; display: block;
+  }
+  .recebe-item {
+    display: flex; align-items: center; gap: 10px; padding: 7px 0;
+    font-size: 14px; color: var(--cinza-texto);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .recebe-item:last-child { border-bottom: none; }
+  .recebe-check { color: var(--rosa-claro); font-size: 16px; flex-shrink: 0; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes rosePulse {
+    0%, 100% { box-shadow: 0 8px 32px rgba(194,24,91,0.4); }
+    50% { box-shadow: 0 8px 48px rgba(194,24,91,0.7); }
+  }
+
+  .fade-in { animation: fadeUp 0.5s ease both; }
+</style>
+</head>
+<body>
+
+<!-- LANDING -->
+<div id="landing">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="corner tl"></div>
+  <div class="corner tr"></div>
+  <div class="corner bl"></div>
+  <div class="corner br"></div>
+
+  <div class="hero-content">
+    <span class="badge">💕 Programa Exclusivo para Mulheres 40+</span>
+    <h1 class="hero-title">
+      Descubra seu<br>
+      <span class="rosa">Tipo de</span><br>
+      <span class="gold">Metabolismo</span>
+    </h1>
+    <div class="divider"></div>
+    <p class="hero-sub">7 perguntas que revelam por que você não está emagrecendo — e o que fazer agora.</p>
+    <button class="cta-btn" onclick="startQuiz()">Fazer o Quiz Grátis →</button>
+    <p class="cta-note">Leva menos de 2 minutos • 100% gratuito</p>
+  </div>
+
+  <div class="features">
+    <div class="features-grid">
+      <div class="feat"><span class="feat-icon">🔬</span><span class="feat-text"><strong>Análise personalizada</strong> do seu tipo metabólico</span></div>
+      <div class="feat"><span class="feat-icon">💊</span><span class="feat-text"><strong>Descubra</strong> o que está travando seu emagrecimento</span></div>
+      <div class="feat"><span class="feat-icon">🍽️</span><span class="feat-text"><strong>Cardápio e receitas</strong> para o seu perfil específico</span></div>
+      <div class="feat"><span class="feat-icon">⏱️</span><span class="feat-text"><strong>Resultados reais</strong> em 7 dias com o método certo</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz">
+  <div class="quiz-bg"></div>
+  <div class="quiz-inner">
+    <div class="prog-wrap">
+      <div class="prog-label">
+        <span>SEU PERFIL METABÓLICO</span>
+        <span id="progText">0 / 7</span>
+      </div>
+      <div class="prog-track">
+        <div class="prog-fill" id="progFill"></div>
+      </div>
+    </div>
+    <div class="q-wrap" id="qWrap"></div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div id="result">
+  <div class="result-bg"></div>
+  <div class="corner tl"></div>
+  <div class="corner tr"></div>
+
+  <div class="result-inner">
+    <div class="result-badge">💕 Seu Perfil Metabólico</div>
+    <div class="metabolismo-tipo" id="metTipo">Metabolismo Lento</div>
+    <h2 class="result-title" id="resultTitle">Seu corpo está<br><span class="rosa">pedindo ajuda.</span></h2>
+    <p class="result-desc" id="resultDesc">Suas respostas revelam o motivo pelo qual você não está emagrecendo.</p>
+
+    <div class="sinais-box">
+      <span class="sinais-label">✦ Sinais do seu metabolismo</span>
+      <div id="sinaisList"></div>
+    </div>
+
+    <div class="solucao-box">
+      <span class="solucao-label">✦ O que você precisa agora</span>
+      <div class="solucao-text" id="solucaoText"></div>
+    </div>
+
+    <!-- VALIDACAO -->
+    <div class="validacao-box">
+      <div class="validacao-text" id="validacaoText"></div>
+    </div>
+
+    <!-- PROVA SOCIAL -->
+    <div class="prova-box">
+      <span class="prova-label">✦ Mulheres com esse mesmo perfil</span>
+      <div class="depo">
+        <div class="depo-header">
+          <div class="depo-avatar">A</div>
+          <div><div class="depo-nome">Ana Paula R.</div><div class="depo-idade">47 anos • São Paulo</div></div>
+        </div>
+        <div class="depo-estrelas">★★★★★</div>
+        <div class="depo-texto">"Achava que meu problema era falta de disciplina. Descobri que precisava ajustar minha alimentação para o meu momento hormonal. Em 30 dias perdi medidas que não saíam há 3 anos."</div>
+      </div>
+      <div class="depo">
+        <div class="depo-header">
+          <div class="depo-avatar">C</div>
+          <div><div class="depo-nome">Carla M.</div><div class="depo-idade">52 anos • Belo Horizonte</div></div>
+        </div>
+        <div class="depo-estrelas">★★★★★</div>
+        <div class="depo-texto">"Perdi medidas na cintura e meu inchaço diminuiu muito. O mais surpreendente foi a energia — acordei diferente logo na primeira semana."</div>
+      </div>
+      <div class="depo">
+        <div class="depo-header">
+          <div class="depo-avatar">M</div>
+          <div><div class="depo-nome">Márcia S.</div><div class="depo-idade">44 anos • Recife</div></div>
+        </div>
+        <div class="depo-estrelas">★★★★★</div>
+        <div class="depo-texto">"Nunca pensei que conseguiria emagrecer depois dos 40. O programa é prático, cabe na rotina e os resultados vieram de verdade."</div>
+      </div>
+    </div>
+
+    <!-- O QUE VOCE RECEBE -->
+    <div class="recebe-box">
+      <span class="recebe-label">✦ O que você vai receber</span>
+      <div class="recebe-item"><span class="recebe-check">✓</span>Acesso imediato após a compra</div>
+      <div class="recebe-item"><span class="recebe-check">✓</span>Plano alimentar completo de 7 dias</div>
+      <div class="recebe-item"><span class="recebe-check">✓</span>21 receitas práticas e deliciosas</div>
+      <div class="recebe-item"><span class="recebe-check">✓</span>Estratégias para reduzir o inchaço</div>
+      <div class="recebe-item"><span class="recebe-check">✓</span>Orientação para metabolismo feminino 40+</div>
+      <div class="recebe-item"><span class="recebe-check">✓</span>Guia de substituições inteligentes</div>
+      <div class="recebe-item"><span class="recebe-check">✓</span>Acesso completo durante os 7 dias</div>
+    </div>
+
+    <!-- JORNADA 7 DIAS -->
+    <div style="background:rgba(194,24,91,0.08);border:1px solid rgba(194,24,91,0.2);border-radius:16px;padding:20px;margin-bottom:20px;max-width:400px;width:100%;text-align:left;">
+      <span style="font-size:9px;letter-spacing:3px;color:var(--rosa-claro);text-transform:uppercase;display:block;margin-bottom:14px;">✦ Como funciona a sua jornada</span>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--rosa),var(--rosa-vivo));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:white;flex-shrink:0;">1</div>
+          <span style="font-size:13px;color:var(--cinza-texto);">Acesso imediato — <strong style="color:white;">Dia 1 liberado na hora</strong></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:32px;height:32px;border-radius:50%;background:rgba(194,24,91,0.3);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:white;flex-shrink:0;">2</div>
+          <span style="font-size:13px;color:var(--cinza-texto);">Um novo módulo liberado a cada dia durante 7 dias</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:32px;height:32px;border-radius:50%;background:rgba(194,24,91,0.3);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:white;flex-shrink:0;">3</div>
+          <span style="font-size:13px;color:var(--cinza-texto);">Cada módulo tem cardápio, receitas e estratégias do dia</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:32px;height:32px;border-radius:50%;background:rgba(194,24,91,0.3);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:white;flex-shrink:0;">7</div>
+          <span style="font-size:13px;color:var(--cinza-texto);">No Dia 7 — <strong style="color:white;">bônus exclusivo + plano de 30 dias</strong></span>
+        </div>
+      </div>
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06);font-size:12px;color:var(--cinza-sub);font-style:italic;">
+        Não é um ebook. É uma jornada estruturada — como ter um guia do seu lado por 7 dias.
+      </div>
+    </div>
+
+    <!-- GARANTIA -->
+    <div style="display:flex;align-items:center;gap:14px;background:rgba(232,201,122,0.05);border:1px solid rgba(232,201,122,0.15);border-radius:14px;padding:16px;margin-bottom:24px;max-width:400px;width:100%;text-align:left;">
+      <span style="font-size:32px;flex-shrink:0;">🛡️</span>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--dourado);margin-bottom:4px;">Garantia de 30 dias</div>
+        <div style="font-size:12px;color:var(--cinza-sub);line-height:1.5;">Se em 30 dias você não estiver satisfeita por qualquer motivo, devolvemos 100% do seu dinheiro. Sem perguntas.</div>
+      </div>
+    </div>
+
+    <a href="SEU_LINK_CAKTO_AQUI" class="result-cta" id="ctaBtn">Quero Destravar Meu Metabolismo →</a>
+    <p class="result-cta-sub">🔒 <s style="color:#666;font-size:12px;">R$97,00</s> &nbsp;<strong style="color:#F8BBD0;">R$37,90</strong> • Acesso imediato • Garantia de 30 dias</p>
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    q: "Como você se sente ao acordar pela manhã?",
+    sub: "Seja honesta — isso revela muito sobre seu metabolismo.",
+    options: [
+      { text: "Cansada mesmo depois de dormir bem", pts: 1 },
+      { text: "Um pouco cansada, demoro para engatar", pts: 2 },
+      { text: "Razoável, fico bem depois de um café", pts: 3 },
+      { text: "Com energia, acordo disposta naturalmente", pts: 4 },
+    ]
+  },
+  {
+    q: "Você sente inchaço ou retenção de líquidos com frequência?",
+    sub: "Especialmente na barriga, pernas ou rosto.",
+    options: [
+      { text: "Sim, acordo inchada quase todo dia", pts: 1 },
+      { text: "Com frequência, especialmente à tarde", pts: 2 },
+      { text: "Às vezes, dependendo do que comi", pts: 3 },
+      { text: "Raramente ou nunca", pts: 4 },
+    ]
+  },
+  {
+    q: "Como é sua relação com o desejo por doce?",
+    sub: "Especialmente à tarde ou depois do jantar.",
+    options: [
+      { text: "Muito forte — difícil de resistir todo dia", pts: 1 },
+      { text: "Bastante presente, especialmente quando estresso", pts: 2 },
+      { text: "Presente mas consigo controlar na maioria das vezes", pts: 3 },
+      { text: "Não sinto muito — prefiro comida salgada", pts: 4 },
+    ]
+  },
+  {
+    q: "Como você descreveria seu sono?",
+    sub: "Qualidade e continuidade durante a noite.",
+    options: [
+      { text: "Ruim — acordo várias vezes ou tenho insônia", pts: 1 },
+      { text: "Irregular — às vezes bom, às vezes péssimo", pts: 2 },
+      { text: "Razoável — durmo bem mas poderia ser melhor", pts: 3 },
+      { text: "Bom — durmo bem e acordo descansada", pts: 4 },
+    ]
+  },
+  {
+    q: "Quando você faz dieta, o que acontece?",
+    sub: "Pense na última vez que tentou emagrecer.",
+    options: [
+      { text: "Perco muito pouco mesmo me esforçando bastante", pts: 1 },
+      { text: "Perco no começo mas logo estagna", pts: 2 },
+      { text: "Funciona mas engorda tudo de volta quando paro", pts: 3 },
+      { text: "Funciona bem quando me comprometo", pts: 4 },
+    ]
+  },
+  {
+    q: "Como está sua barriga especificamente?",
+    sub: "A gordura abdominal é o sinal mais claro do metabolismo hormonal.",
+    options: [
+      { text: "Cresceu muito depois dos 40 e não sai de jeito nenhum", pts: 1 },
+      { text: "Está maior do que gostaria e resiste a dietas", pts: 2 },
+      { text: "Incomoda mas reduz um pouco quando me cuido", pts: 3 },
+      { text: "Está sob controle com meus hábitos atuais", pts: 4 },
+    ]
+  },
+  {
+    q: "Qual é sua maior dificuldade para emagrecer?",
+    sub: "A resposta honesta revela onde focar a energia.",
+    options: [
+      { text: "Não sei por onde começar — parece impossível", pts: 1 },
+      { text: "Começo mas não consigo manter a consistência", pts: 2 },
+      { text: "Sigo tudo certinho mas os resultados são lentos", pts: 3 },
+      { text: "Pequenos deslizes que me fazem desistir", pts: 4 },
+    ]
+  },
+];
+
+let current = 0;
+let total = 0;
+
+function startQuiz() {
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('quiz').style.display = 'block';
+  renderQ();
+}
+
+function renderQ() {
+  const q = questions[current];
+  const pct = (current / questions.length) * 100;
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('progText').textContent = current + ' / ' + questions.length;
+
+  document.getElementById('qWrap').innerHTML = `
+    <div class="fade-in">
+      <div class="q-num">Pergunta ${current + 1} de ${questions.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-sub">${q.sub}</div>
+      <div class="options">
+        ${q.options.map(o => `<button class="option" onclick="pick(${o.pts}, this)">${o.text}</button>`).join('')}
+      </div>
+    </div>`;
+}
+
+function pick(pts, el) {
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  setTimeout(() => {
+    total += pts;
+    current++;
+    if (current >= questions.length) showResult();
+    else renderQ();
+  }, 400);
+}
+
+function showResult() {
+  document.getElementById('progFill').style.width = '100%';
+  document.getElementById('progText').textContent = '7 / 7';
+
+  setTimeout(() => {
+    document.getElementById('quiz').style.display = 'none';
+    document.getElementById('result').style.display = 'block';
+
+    let tipo, titulo, desc, sinais, solucao, validacao;
+
+    if (total <= 12) {
+      tipo = 'Metabolismo em Hibernação';
+      titulo = 'Seu corpo está em<br><span class="rosa">modo de sobrevivência.</span>';
+      desc = 'Suas respostas indicam um metabolismo que desacelerou muito após os 40 — provavelmente por anos de dietas restritivas e privação de sono. Não é sua culpa. É fisiologia.';
+      sinais = ['Fadiga constante mesmo descansando', 'Inchaço frequente e retenção severa', 'Forte compulsão por doce', 'Barriga resistente que não sai'];
+      validacao = '<strong>Esse é um dos perfis mais comuns entre mulheres acima dos 40 anos.</strong> Mulheres com esse mesmo perfil costumam relatar dificuldade para perder gordura abdominal mesmo reduzindo calorias — porque o problema não é caloria, é hormônio. Então não é só você.';
+      solucao = 'Você precisa reparar o metabolismo antes de emagrecer. O programa de 7 dias foi criado exatamente para isso — reativar a queima de gordura passo a passo, sem passar fome.';
+    } else if (total <= 18) {
+      tipo = 'Metabolismo Hormonal Desequilibrado';
+      titulo = 'Seus hormônios estão<br><span class="rosa">travando o emagrecimento.</span>';
+      desc = 'A queda do estrogênio e progesterona depois dos 40 está mudando onde e como seu corpo armazena gordura. Você não está fazendo nada de errado — o jogo mudou.';
+      sinais = ['Peso que sobe facilmente e desce devagar', 'Gordura concentrando na barriga', 'Cansaço que piora à tarde', 'Sono irregular afetando o apetite'];
+      validacao = '<strong>Esse é o perfil hormonal mais frequente depois dos 40.</strong> Mulheres com esse padrão frequentemente relatam que fazem tudo certo — e ainda assim não veem resultado. A ciência confirma: sem estratégia hormonal, nenhuma dieta funciona de verdade nessa fase.';
+      solucao = 'Você precisa de uma estratégia anti-inflamatória e hormonal. O programa de 7 dias inclui cardápio e receitas específicas para equilibrar os hormônios naturalmente.';
+    } else if (total <= 24) {
+      tipo = 'Metabolismo em Transição';
+      titulo = 'Você está no caminho<br><span class="rosa">mas precisa de ajuste.</span>';
+      desc = 'Seu metabolismo não está quebrado — está se adaptando às mudanças dos 40. Com as ferramentas certas você acelera esse processo e começa a ver resultado real.';
+      sinais = ['Resultados inconsistentes nas dietas', 'Boa energia mas pequena resistência abdominal', 'Desejo por doce em momentos de estresse', 'Plateaus frequentes no emagrecimento'];
+      validacao = '<strong>Muitas mulheres com esse perfil estão a um passo do resultado.</strong> Você já tem consciência e alguma disciplina — o que falta é o método certo para essa fase. Com a estratégia correta, o corpo responde muito mais rápido do que você imagina.';
+      solucao = 'Você precisa de consistência e das estratégias certas para essa fase. O programa de 7 dias vai dar o sistema que falta para transformar seus esforços em resultados.';
+    } else {
+      tipo = 'Metabolismo Ativo com Potencial';
+      titulo = 'Seu metabolismo tem<br><span class="rosa">base para decolar.</span>';
+      desc = 'Suas respostas mostram uma mulher com hábitos razoáveis e boa consciência corporal. Com o programa certo você vai potencializar o que já funciona e eliminar o que trava.';
+      sinais = ['Boa resposta quando se compromete', 'Energia razoável na maioria dos dias', 'Metabolismo responsivo a mudanças', 'Potencial de aceleração com nutrição certa'];
+      validacao = '<strong>Seu perfil é raro — e isso é uma vantagem enorme.</strong> Mulheres com esse padrão metabólico respondem muito bem a ajustes estratégicos de alimentação. Com o método certo você vai muito mais longe do que imagina.';
+      solucao = 'Você precisa de um sistema organizado e das receitas certas para o seu perfil. O programa de 7 dias vai levar você do bom para o excelente em uma semana.';
+    }
+
+    document.getElementById('metTipo').textContent = tipo;
+    document.getElementById('resultTitle').innerHTML = titulo;
+    document.getElementById('resultDesc').textContent = desc;
+    document.getElementById('validacaoText').innerHTML = validacao;
+    document.getElementById('sinaisList').innerHTML = sinais.map(s =>
+      `<div class="sinal-item"><span class="sinal-icon">→</span>${s}</div>`).join('');
+    document.getElementById('solucaoText').textContent = solucao;
+  }, 300);
+}
+</script>
+</body>
+</html>
